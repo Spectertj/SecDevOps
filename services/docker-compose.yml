@@ -5,9 +5,9 @@ services:
         container_name: sonar
         depends_on: 
           - db_sonar
-        ports:
-          - "9000:9000"
-          - "9092:9092"
+        expose:
+          - "9000"
+          - "9092"
         restart: unless-stopped
         environment:
           - SONARQUBE_JDBC_USERNAME=ranos
@@ -42,9 +42,9 @@ services:
         dockerfile: Dockerfile.jenkins
       restart: always
       hostname: 'jenkins'
-      ports:
-        - '8080:8080'
-        - '50000:50000'
+      expose:
+        - '8080'
+        - '50000'
       volumes:
         - 'jenkins_home:/var/jenkins_home'
         - '/var/run/docker.sock:/var/run/docker.sock'
@@ -58,10 +58,10 @@ services:
       environment:
         GITLAB_OMNIBUS_CONFIG: |
           external_url 'http://localhost:8000'
-      ports:
-        - '8000:8000'
-        - '8443:8443'
-        - '23:23'
+      expose:
+        - '8000'
+        - '8443'
+        - '23'
       volumes:
         - 'gitlab-config:/etc/gitlab'
         - 'gitlab-logs:/var/log/gitlab'
