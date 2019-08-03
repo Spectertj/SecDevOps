@@ -1,0 +1,27 @@
+version: '3'
+services:
+    dev:
+        image:  httpd:latest
+        container_name: osintdevelop
+        volumes:
+            - /opt/deploy/develop:/usr/local/apache2/htdocs:ro
+        networks:
+            - services
+    pre:
+        image:  httpd:latest
+        container_name: osintpre
+        volumes:
+            - /opt/deploy/pre:/usr/local/apache2/htdocs:ro
+        networks:
+            - services
+    pro:
+        image:  httpd:latest
+        container_name: osintpro
+        volumes:
+            - /opt/deploy/pro:/usr/local/apache2/htdocs:ro
+        networks:
+            - services
+networks:
+    services:
+        external:
+          name: services
